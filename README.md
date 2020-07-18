@@ -23,6 +23,6 @@ Lince Harim Pérez Trinidad
 <br>
 Cd. Reynosa, Tamaulipas   	
 <br>
-June 2020
+July 2020
 </H2>
 </html>
