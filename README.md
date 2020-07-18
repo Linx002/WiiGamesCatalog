@@ -21,6 +21,8 @@ PRESENTS:
 <H2>
 Lince Harim Pérez Trinidad
 <br>
-Cd. Reynosa, Tamaulipas   		June 2020
+Cd. Reynosa, Tamaulipas   	
+<br>
+June 2020
 </H2>
 </html>
