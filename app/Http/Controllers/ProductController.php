@@ -33,15 +33,7 @@ class ProductController extends Controller
     public function Delete($id){
         $collection = (new MongoDB\Client)->WiiGames->Games;
         $game = $collection->findOne(["_id" => new MongoDB\BSON\ObjectID($id)]);
-        $collectiondev = (new MongoDB\Client)->WiiGames->Developer;
-        $developers = $collectiondev->find();
-        $collectionpub = (new MongoDB\Client)->WiiGames->Publisher;
-        $publishers = $collectionpub->find();
-        $collectiongen = (new MongoDB\Client)->WiiGames->Genre;
-        $genres = $collectiongen->find();
-        $collectioncode = (new MongoDB\Client)->WiiGames->idCode;
-        $Idcode = $collectioncode->find();
-        return view('Admin.games.delete', ['game' => $game, 'idcode'=>$Idcode,'developers' => $developers, 'publishers' => $publishers, 'genres' => $genres]);
+        return view('Admin.games.delete', ['game' => $game]);
     }
 
     public function Remove(){
@@ -49,6 +41,10 @@ class ProductController extends Controller
         $deleteOneResult = $collection->deleteOne(
             ["_id" => new \MongoDB\BSON\ObjectId(request('gameid'))]
         );
+        // if ($deleteOneResult->getDeletedCount() == 1)
+        //     return redirect(route('GameRemoved'))->with('mssg', "Game deleted successfully")->with("alerttype", "danger");
+        // else
+        //     return redirect(route('GameRemoved'))->with('mssg', "Game was not deleted. Try again later.")->with("alerttype", "warning");
         return redirect('/admin/games');
     }
 
@@ -66,12 +62,16 @@ class ProductController extends Controller
         return view('Admin.Games.create', ['game'=>$game,'idcode'=>$Idcode,'developers' => $developers, 'publishers' => $publishers, 'genres' => $genres]);
     }
 
+        //to store/edit/delete
+        // "name of column" => request("id in blade.php")
+
     public function Store(){
         $game = [
             "game_name" => request("game_name"),
-            "idcode" => request("idcode"),
+            "idCode" => request("idCode"),
             "developer" => request("developer"),
             "publisher" => request("publisher"),
+            "genre" => request("genre"),
             "rating_type" => request("rating_type"),
             "rating_value" => request("rating_value"),
             "synopsis" => request("synopsis"),
@@ -111,35 +111,12 @@ class ProductController extends Controller
         ],[
             '$set' => $game
         ]);
+        // if ($updateOneResult->getModifiedCount() == 1)
+        //     return redirect(route('GameUpdated'))->with('mssg', "Game updated")->with("alerttype", "success");
+        // else
+        //     return redirect(route('GameUpdated'))->with('mssg', "Update unsuccesful. Try again later.")->with("alerttype", "warning");
         return redirect('/admin/games/'.request("gameid"));
     }
-
-    public function AddComments(){
-        $collection = (new MongoDB\Client)->WiiGames->Games;
-        $comment = [
-            "user_id" => request('userid'),
-            "comment" => request('comment'),
-            "date" => request('date')
-        ];
-        $game = $collection->findOne(["_id" => new MongoDB\BSON\ObjectID(request('gameid')) ]);
-        $comments = $game->comments;
-        if (count($comments) == 0){
-            $comments = [$comment];
-        } else{
-            $comments = [$comment, ...$comments];
-        }
-        $updateOneResult = $collection->updateOne([
-            "_id" => new MongoDB\BSON\ObjectID(request('gameid'))
-        ],[
-            '$set' => ['coment' => $comments]
-        ]);
-        return redirect("/Games/".request('gameid'));
-    }
-
-    // public function GetComments($id){
-    //     $collection = (new MongoDB\Client)->WiiGames->games;
-    //     $product = $collection->findOne(["_id" => new MongoDB\BSON\ObjectID($id)]);
-    // }
 
     public function Details($id){
         $collection = (new MongoDB\Client)->WiiGames->Games;

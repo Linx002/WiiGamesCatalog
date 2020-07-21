@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="idcode">Id Code</label>
-                        <input class="form-control" type="text" name="idcode" id="idcode">
+                        <input class="form-control" type="text" name="idCode" id="idCode">
                     </div>
                 </div>
                 <div class="form-group">
@@ -87,13 +87,8 @@
                         </select>
                     </div>
                 </div>
-                <script>
-                function goBack() {
-                    window.history.back();
-                }
-                </script>
-                <button onClick="goBack()" class="btn btn-default">Back to Catalog</a>
-                    <button type="submit" class="btn btn-success">Create</button>
+                <button type="submit" class="btn btn-success">Create</button>
+                <button type="submit" class="btn btn-default">Cancel</button>
             </form>
         </div>
     </div>

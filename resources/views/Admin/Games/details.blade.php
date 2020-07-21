@@ -19,6 +19,7 @@
                 <div class="card-body">
                     <a href="/admin/games/edit/{{$game->_id}}" class="card-link">Edit</a>
                     <a href="/admin/games/delete/{{$game->_id}}" class="card-link">Delete</a>
+                    <a href="/admin/games/" class="card-link">Back to Catalog</button>
                 </div>
             </div>
         </div>

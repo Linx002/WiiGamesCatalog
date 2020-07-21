@@ -34,7 +34,7 @@ Route::get('/admin/games/{id}', 'ProductController@Show');
 
 // gamestore
 
-Route::get('/games', 'ProductController@GameStore') -> name('GameStore');
+Route::get('/games', 'ProductController@GameStore');
 
 Route::get('/games/{id}', 'ProductController@Details');
 
